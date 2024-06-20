@@ -13,9 +13,8 @@ class VagaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-
         $vagas = DB::table('vagas')->get();
         return view('admin.vagas', compact('vagas'));
     }
@@ -25,7 +24,9 @@ class VagaController extends Controller
      */
     public function create()
     {
-        //
+
+        $vagas = DB::table('vagas')->where('status', 'Ativo')->get();
+        return view('admin.add', compact('vagas'));
     }
 
     public function toAscii($str, $replace = array(), $delimiter = '-')
@@ -72,12 +73,9 @@ class VagaController extends Controller
 
         if ($vagas->save()) {
 
-            $success = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Vaga adicionada com sucesso!</strong> Confira abaixo.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
+            $success = '';
 
-            return redirect()->route('vagas')->with(['success' => $success]);
+            return redirect()->route('vagas')->with(['success', 'Vaga adicionada com sucesso!']);
 
         } else {
 

@@ -2,6 +2,73 @@
 
 <body>
 
+    @if (isset($success))
+        <div class="modal modal-blur fade show" id="modal-success" tabindex="-1" role="dialog" aria-modal="true"
+            style="display: block;">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content" style="background-color: #ffffff;">
+                    <a href="/" type="button" class="btn-close" aria-label="Close"></a>
+                    <div class="modal-status bg-success"></div>
+                    <div class="modal-body text-center py-4">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M9 12l2 2l4 -4"></path>
+                        </svg>
+                        <h3>{{ $success }}</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col"><a href="/" class="btn btn-success w-100">
+                                        Voltar
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if ( isset($error) ) 
+        <div class="modal modal-blur fade show" id="modal-danger" tabindex="-1" role="dialog" aria-modal="true"
+            style="display: block;">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content" style="background-color: #ffffff;">
+                    <a href="/" type="button" class="btn-close" ></a>
+                    <div class="modal-status bg-danger"></div>
+                    <div class="modal-body text-center py-4">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 9v4"></path>
+                            <path
+                                d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z">
+                            </path>
+                            <path d="M12 16h.01"></path>
+                        </svg>
+                        <h3>{{ $error }}</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col"><a href="/" class="btn btn-danger w-100">
+                                        Voltar
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <section style="background-image: url({{ asset('assets/img/banner.jpg') }})" class="banner-section mb-5">
         <header class="navbar navbar-expand-md navbar-transparent d-print-none">
             <div class="container-fluid">
@@ -60,8 +127,9 @@
                         @foreach ($vagas as $vaga)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="heading-1">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse-{{ $vaga->id }}" aria-expanded="false">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse-{{ $vaga->id }}"
+                                        aria-expanded="false">
                                         {{ $vaga->titulo }}
                                     </button>
                                 </h2>
@@ -95,7 +163,8 @@
                             <div class="modal modal-blur fade" id="modalVaga{{ $vaga->id }}" tabindex="-1"
                                 style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                    <form class="w-100" action="{{ route('cadastrar-candidato') }}" method="POST" enctype="multipart/form-data">
+                                    <form class="w-100" action="{{ route('cadastrar-candidato') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-content" style="background-color: #ffffff;">
                                             <div class="modal-header">
@@ -104,50 +173,57 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="row mb-3 text-center    ">
-                                                    <h4>Preencha o formulário corretamente</h4>
+                                                <div class="row mb-3 text-center">
+                                                    <h3>Preencha o formulário corretamente</h3>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-md-4 mb-3">
-                                                        <label class="form-label">Nome Completo <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Nome Completo <span
+                                                                style="color: red;">*</span></label>
                                                         <input type="text" class="form-control" name="nome"
                                                             placeholder="Nome:">
                                                     </div>
                                                     <div class="col-md-4 mb-3">
-                                                        <label class="form-label">Email <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Email <span
+                                                                style="color: red;">*</span></label>
                                                         <input type="text" class="form-control" name="email"
                                                             placeholder="Email:">
                                                     </div>
                                                     <div class="col-md-4 mb-3">
-                                                        <label class="form-label">Telefone <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Telefone <span
+                                                                style="color: red;">*</span></label>
                                                         <input type="text" name="telefone" class="form-control"
                                                             placeholder="(00) 0000-0000">
                                                     </div>
                                                     <div class="col-md-6 mb-3">
-                                                        <label class="form-label">Data de Nascimento <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Data de Nascimento <span
+                                                                style="color: red;">*</span></label>
                                                         <input type="date" name="data_nasc" class="form-control">
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Vaga Pretendida</label>
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $vaga->titulo }}" readonly>
-                                                        <input type="hidden" value="{{ $vaga->id }}">
+                                                        <input type="text" class="form-control" value="{{ $vaga->titulo }}" readonly>
+                                                        <input type="hidden" name="titulo_vaga" value="{{ $vaga->titulo }}">
+                                                        <input type="hidden" name="slug_vaga" value="{{ $vaga->slug }}">
                                                     </div>
                                                     <div class="col-md-12 mb-3">
-                                                        <label class="form-label">Resumo Profissional <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Resumo Profissional <span
+                                                                style="color: red;">*</span></label>
                                                         <textarea name="resumo_prof" class="form-control" rows="6"
                                                             placeholder="Conte um pouco sobre suas habilidades e sua jornada profissional até aqui..."></textarea>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
-                                                        <label class="form-label">Resumo Acadêmico <span style="color: red;">*</span></label>
+                                                        <label class="form-label">Resumo Acadêmico <span
+                                                                style="color: red;">*</span></label>
                                                         <textarea name="resumo_acad" class="form-control" rows="6"
                                                             placeholder="Conte um pouco sobre sua jornada acadêmica..."></textarea>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-label">Envie o seu currículo</div>
                                                         <input type="file" name="file_name" class="form-control">
-                                                        <span>Apenas arquivos .pdf, .doc ou .docx <span style="color: red;">*</span></span>
-                                                      </div>
+                                                        <span>Apenas arquivos .pdf, .doc ou .docx <span
+                                                                style="color: red;">*</span></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

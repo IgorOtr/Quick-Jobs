@@ -19,8 +19,14 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-user me-2"></i>Candidatos</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('candidatos') }}" class="dropdown-item">Todos os Candidatos</a>
-                    <a href="{{ route('curriculos') }}" class="dropdown-item">Apenas Currículos</a>
+
+                    @foreach ($vagas as $vaga)
+
+                        <a href="{{ url('/Admin/Candidatos/'.$vaga->slug) }}" class="dropdown-item">{{ $vaga->titulo }}</a>
+                        
+                    @endforeach
+
+                    <a href="{{ route('curriculos') }}" style="border-top: 2px solid #ed8600; border-radius: 0px;" class="dropdown-item">Apenas Currículos</a>
                 </div>
             </div>
             {{-- <div class="nav-item dropdown">

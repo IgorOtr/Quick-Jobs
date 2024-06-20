@@ -20,12 +20,22 @@
 
             @include('admin.includes.navbar')
 
+            @if (session('success'))
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session('success') }}</strong> Confira abaixo.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            @endif
+
             <div class="container-fluid p-5">
                 <div class="row mb-5">
                     <div class="col-md-12 text-center">
                         <h2>TODAS AS VAGAS</h2>
                     </div>
                 </div>
+                
                 <div class="row mb-3">
 
                     @foreach ($vagas as $vaga)
@@ -38,7 +48,7 @@
                                     <h5 class="card-title">{{ $vaga->titulo }}</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a href="">Ver Candidatos</a></li>
+                                    <li class="list-group-item"><a href="{{ url('/Admin/Candidatos/'.$vaga->slug) }}" target="_blank">Ver Candidatos</a></li>
                                     <li class="list-group-item"><a href="" data-bs-toggle="modal"
                                         data-bs-target="#moreInfoModal{{ $vaga->id }}">Informações da Vaga</a></li>
                                 </ul>

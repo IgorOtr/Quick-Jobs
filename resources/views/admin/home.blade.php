@@ -54,7 +54,7 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-info-circle fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Candidatos sem Currículo</p>
+                                <p class="mb-2">Banco de Talentos</p>
                                 <h6 style="font-size: 22px;" class="mb-0 text-end">5</h6>
                             </div>
                         </div>

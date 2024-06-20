@@ -20,7 +20,8 @@ return new class extends Migration
             $table->longText('resumo_prof');
             $table->longText('resumo_acad');
             $table->string('file_name');
-            $table->string('id_vaga');
+            $table->string('titulo_vaga');
+            $table->string('slug_vaga');
             $table->timestamps();
         });
     }
