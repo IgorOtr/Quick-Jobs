@@ -37,7 +37,7 @@
                             <i class="fa fa-user fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Cadidatos</p>
-                                <h6 class="mb-0 text-end" style="font-size: 22px;">19</h6>
+                                <h6 class="mb-0 text-end" style="font-size: 22px;">{{ count($candidatos) }}</h6>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <i class="fa fa-file fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Currículos Recebidos</p>
-                                <h6 style="font-size: 22px;" class="mb-0 text-end">14</h6>
+                                <h6 style="font-size: 22px;" class="mb-0 text-end">{{ count($curriculos) }}</h6>
                             </div>
                         </div>
                     </div>
@@ -71,52 +71,24 @@
                         <div class="h-100 bg-secondary rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Últimos Candidatos</h6>
-                                <a href="">Ver Todos</a>
                             </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/img/user.jpg') }}"
-                                    alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
+
+                            @foreach ($candidatos as $candidato)
+                                
+                                <div class="d-flex align-items-center border-bottom py-3">
+                                    <i class="fa fa-user" style="font-size: 30px;"></i>
+                                    <div class="w-100 ms-3">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-0">{{ $candidato->nome }}</h6>
+                                            <small>{{ \Carbon\Carbon::parse($candidato->created_at)->format('d/m/Y') }} ás
+                                                {{ \Carbon\Carbon::parse($candidato->created_at)->format('H') - 3 }}{{ \Carbon\Carbon::parse($candidato->created_at)->format(':i') }}</small>
+                                        </div>
+                                        <span>{{ substr($candidato->resumo_prof, 0, 30).'...' }}</span>
                                     </div>
-                                    <span>Short message goes here...</span>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/img/user.jpg') }}"
-                                    alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/img/user.jpg') }}"
-                                    alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center pt-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{ asset('assets/img/user.jpg') }}"
-                                    alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
+
+                            @endforeach
+
                         </div>
                     </div>
 

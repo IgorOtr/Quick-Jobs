@@ -11,6 +11,8 @@ class HomeController extends Controller
     public function index() 
     {
         $vagas = DB::table('vagas')->where('status', 'Ativo')->get();
-        return view('admin.home', compact('vagas'));
+        $candidatos = DB::table('candidatos')->limit(5)->get();
+        $curriculos = DB::table('candidatos')->where('file_name','<>','')->get('file_name');
+        return view('admin.home', compact('vagas','candidatos', 'curriculos'));
     }
 }

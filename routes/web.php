@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VagaController;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', [CandidatoController::class, 'index'])->name('index');
 Route::get('/success', [CandidatoController::class, 'returnSuccess'])->name('success');
 Route::get('/error', [CandidatoController::class, 'returnError'])->name('error');
