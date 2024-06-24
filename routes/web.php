@@ -25,7 +25,7 @@ Route::group(["prefix" => "Admin"], function () {
 
     Route::group(["prefix" => "Candidatos"], function () {
         Route::get('/{vaga}', [CandidatoController::class, 'getCandidatosBySlug'])->middleware(['auth', 'verified'])->name('candidatos');
-        Route::get('/}', function () {return view('admin.curriculos');})->middleware(['auth', 'verified'])->name('curriculos');
+        Route::get('/banco-de-taletos', function () {return view('admin.curriculos');})->middleware(['auth', 'verified'])->name('banco-de-taletos');
 
         Route::post('/cadastrar', [CandidatoController::class, 'store'])->name('cadastrar-candidato');
     });

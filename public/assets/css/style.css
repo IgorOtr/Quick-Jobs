@@ -497,4 +497,20 @@
         padding: 12px !important;
     }
 
+    .banner-text h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .banner-text {
+        top: 40%;
+        left: 0%;
+    }
+
+    .banner-section {
+        background-position-x: -920px;
+        height: 100vh;
+    }
+
 }
