@@ -40,7 +40,7 @@
                     @endif
 
                     @foreach ($candidatos as $candidato)
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="card" style="background-color: #191C24;">
                                 <div class="card-body p-4 text-center">
                                     <h3 class="mb-3">{{ $candidato->nome }}</h3>
@@ -52,20 +52,29 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         @if (!$candidato->file_name)
-                                            <div class="col-md-12 mb-2">
+                                            <div class="col-md-6 mb-2">
                                                 <button class="btn btn-primary w-100" data-bs-toggle="modal"
                                                     data-bs-target="#infoCandidatoSemCurriculo{{ $candidato->id }}">Ver
                                                     Informações</button>
                                             </div>
-                                        @else
                                             <div class="col-md-6 mb-2">
                                                 <button class="btn btn-primary w-100" data-bs-toggle="modal"
-                                                    data-bs-target="#infoCandidato{{ $candidato->id }}">Ver
-                                                    Informações</button>
+                                                    data-bs-target="#testeDiscCandidato{{ $candidato->id }}">Teste
+                                                    DISC</button>
                                             </div>
-                                            <div class="col-md-6 mb-2">
+                                        @else
+                                            <div class="col-md-4 mb-2">
+                                                <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                                                    data-bs-target="#infoCandidato{{ $candidato->id }}">Informações</button>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                                                    data-bs-target="#testeDiscCandidato{{ $candidato->id }}">Teste
+                                                    DISC</button>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
                                                 <a href="{{ asset('assets/files/' . $candidato->file_name) }}"
-                                                    target="_blank" class="btn btn-danger w-100">Baixar Currículo <i
+                                                    target="_blank" class="btn btn-danger w-100">Currículo <i
                                                         class="fa fa-download"></i></a>
                                             </div>
                                         @endif
@@ -96,12 +105,87 @@
                                             <li class="mb-3"><strong>Resumo Acadêmico:</strong>
                                                 {{ $candidato->resumo_acad }}</li>
                                             <li class="mb-3">
-                                                <strong>Currículo:</strong> <a href="{{ asset('assets/files/' . $candidato->file_name) }}" target="_blank">Clique para abrir</a>
+                                                <strong>Currículo:</strong> <a
+                                                    href="{{ asset('assets/files/' . $candidato->file_name) }}"
+                                                    target="_blank">Clique para abrir</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="testeDiscCandidato{{ $candidato->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Candidato:
+                                            {{ $candidato->nome }}</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>Análise Teste DISC</h3>
+                                        
+                                        <?php 
+
+                                            $arrayFiltrado = array_filter(json_decode($candidato->teste_disc, true), function ($alt){
+                                                return $alt == "A";
+                                            });
+                                            
+                                            $arrayFiltradoReindexado = array_values($arrayFiltrado);
+                                            
+                                            $A = count($arrayFiltradoReindexado);
+                                        
+                                        ?>
+                                        <?php 
+
+                                            $arrayFiltrado = array_filter(json_decode($candidato->teste_disc, true), function ($alt){
+                                                return $alt == "C";
+                                            });
+                                            
+                                            $arrayFiltradoReindexado = array_values($arrayFiltrado);
+                                            
+                                            $C = count($arrayFiltradoReindexado);
+                                        
+                                        ?>
+                                        <?php 
+
+                                            $arrayFiltrado = array_filter(json_decode($candidato->teste_disc, true), function ($alt){
+                                                return $alt == "I";
+                                            });
+                                            
+                                            $arrayFiltradoReindexado = array_values($arrayFiltrado);
+                                            
+                                            $I = count($arrayFiltradoReindexado);
+                                        
+                                        ?>
+                                        <?php 
+
+                                            $arrayFiltrado = array_filter(json_decode($candidato->teste_disc, true), function ($alt){
+                                                return $alt == "O";
+                                            });
+                                            
+                                            $arrayFiltradoReindexado = array_values($arrayFiltrado);
+                                            
+                                            $O = count($arrayFiltradoReindexado);
+                                        
+                                        ?>
+                                        <ul>
+                                            <li><strong>Alternativa A:</strong> Escolhida <?php echo $A ?> vezes</li>
+                                            <li><strong>Alternativa C:</strong> Escolhida <?php echo $C ?> vezes</li>
+                                            <li><strong>Alternativa I:</strong> Escolhida <?php echo $I ?> vezes</li>
+                                            <li><strong>Alternativa O:</strong> Escolhida <?php echo $O ?> vezes</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +216,8 @@
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>

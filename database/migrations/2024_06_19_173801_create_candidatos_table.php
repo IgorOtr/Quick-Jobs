@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('resumo_acad');
             $table->string('file_name');
             $table->string('titulo_vaga');
+            $table->json('teste_disc');
             $table->string('slug_vaga');
             $table->timestamps();
         });
